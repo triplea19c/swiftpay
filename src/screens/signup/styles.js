@@ -5,50 +5,35 @@ const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
     welcomeText: {
       color: 'red',
-      fontSize: 20
+      fontSize: 20,
+      textAlign: 'center'
     },
-    buttons: {
+    button: {
       flexDirection: 'row',
-      justifyContent: 'space-evenly'
+      justifyContent: 'space-evenly',
+      marginTop: 20
     },
-    loginButton: {
+    signupButton: {
       backgroundColor: 'red',
       padding: 20,
       borderRadius: 35,
       width: width - 150,
-      alignItems: 'center'
+      alignItems: 'center',
+      justifyContent: 'center'
     },
-    loginText: {
+    signupText: {
       color: '#ffffff',
       textAlign: 'center'
-    },
-    input: {
-      backgroundColor: 'white',
-      padding: 10,
-      margin: 10,
-      borderRadius: 2,
-      fontSize: 12,
-      width: width - 50,
-      borderWidth: 1,
-      borderColor: 'gray',
-      borderRadius: 5
-    },
-    passwordInput: {
-      backgroundColor: 'white',
-      padding: 10,
-      margin: 10,
-      borderRadius: 2,
-      fontSize: 12,
-      width: width - 50,
-      borderWidth: 1,
-      borderColor: 'gray',
-      borderRadius: 5
     },
     imageBackground: {
       width: '100%',
       height: '100%',
-      alignItems: 'center',
-      justifyContent: 'center'
+    },
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      padding: 50,
+      marginBottom: 50
     }
   })
  

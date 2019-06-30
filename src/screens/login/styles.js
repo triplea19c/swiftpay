@@ -16,6 +16,11 @@ const styles = StyleSheet.create({
       fontSize: 16,
       textAlign: 'center'
     },
+    button: {
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
+      marginTop: 20
+    },
     loginButton: {
       backgroundColor: 'red',
       padding: 20,
@@ -25,35 +30,6 @@ const styles = StyleSheet.create({
     loginText: {
       color: '#ffffff',
       textAlign: 'center'
-    },
-    innerContainer: {
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    usernameInput: {
-      backgroundColor: 'white',
-      borderRadius: 2,
-      fontSize: 12,
-      width: width - 50,
-      borderWidth: 1,
-      borderColor: 'gray',
-      borderRadius: 5,
-      padding: 10,
-      marginTop: 10,
-      marginBottom: 10
-    },
-    passwordInput: {
-      backgroundColor: 'white',
-      borderRadius: 2,
-      fontSize: 12,
-      width: width - 50,
-      borderWidth: 1,
-      borderColor: 'gray',
-      borderRadius: 5,
-      padding: 10,
-      marginTop: 10,
-      marginBottom: 10
     }
   })
  

@@ -1,20 +1,31 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
+    drawerImage: {
+      width: '200%', 
+      height: '100%', 
+      marginLeft: 15, 
+      marginBottom: 20
+    },
     topImageBackground: {
-      width: '120%',
-      height: '240%',
-      position: 'relative',
-      left: 165,
-      bottom: 15
+      width: '200%',
+      height: '240%'
     },
-    MainContainer: {
+    container: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start'
+    },
+    mainContainer: {
       flex: 1,
-      paddingTop: 20,
-      alignItems: 'center',
-      marginTop: 50,
-      justifyContent: 'center',
+      flexDirection: 'column',
+      justifyContent: 'center'
     },
+    innerContainer: {
+      flexDirection: 'row',
+      flex: 4,
+      justifyContent: 'space-evenly'
+    }
   })
 
   export default styles

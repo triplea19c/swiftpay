@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { TextField } from 'react-native-material-textfield';
 import { Text, View, Image, TouchableOpacity, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import image from '../../../assets/images/swiftpaylogo.png'
 import styles from './styles'
@@ -11,7 +12,19 @@ const DismissKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 )
 
-const LoginScreen = ({ navigation }) => {
+class LoginScreen extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      user: "",
+      password: ""
+    }
+  }
+
+  render() {
+    let { user } = this.state;
+    let { password } = this.state
+
    return(
      <DismissKeyboard>
         <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
@@ -20,21 +33,19 @@ const LoginScreen = ({ navigation }) => {
             <Text style={styles.welcomeText}>
             Please Log in to Continue
             </Text>
-            <View style={styles.innerContainer}>
-                <TextInput style={styles.usernameInput}
-                placeholder = "Username/Email"
-                underlineColorAndroid = "transparent"
-                autoCapitalize = "none"
-                placeholderTextColor = "gray"
+            <View>
+                <TextField
+                  label='username/email'
+                  value={user}
+                  onChangeText={ (user) => this.setState({ user })}
                 />
-                <TextInput style={styles.passwordInput}
-                placeholder = "Password"
-                underColorAndroid = "transparent"
-                autoCapitalize = "none"
-                placeholderTextColor = "gray"
+                <TextField
+                  label='Password'
+                  value={password}
+                  onChangeText={ (password) => this.setState({ password })}
                 />
-                <View style={styles.buttons}>
-                    <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Dashboard')}>
+                <View style={styles.button}>
+                    <TouchableOpacity style={styles.loginButton} onPress={() => this.props.navigation.navigate('Dashboard')}>
                         <Text style={styles.loginText}>LOGIN</Text>
                     </TouchableOpacity>
                 </View>
@@ -43,7 +54,7 @@ const LoginScreen = ({ navigation }) => {
     </DismissKeyboard>
    )
  }
-
+}
  const AppNavigator = createStackNavigator(
     {
       Login: LoginScreen,
