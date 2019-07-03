@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
     loginText: {
       color: '#ffffff',
       textAlign: 'center'
+    },
+    signupText: {
+      textAlign: 'center',
+      marginTop: 20
     }
   })
  

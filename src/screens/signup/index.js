@@ -68,6 +68,7 @@ export default class SignupScreen extends Component {
                     <Text style={styles.signupText}>SIGN UP</Text>
                   </TouchableOpacity>
                 </View>
+                <Text style={styles.loginText} onPress={() => this.props.navigation.navigate('Login')}>Already have an account?</Text>
               </View>
           </ImageBackground>
         </KeyboardAvoidingView>

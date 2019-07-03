@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
       marginBottom: 20
     },
     topImageBackground: {
-      width: '200%',
-      height: '240%'
+      width: '100%',
+      height: '100%'
     },
     container: {
       flexDirection: 'row',

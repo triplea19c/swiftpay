@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Image, TouchableOpacity, ImageBackground } from 'react-native'
-import imageBackground from '../../../assets/images/Polygon.png'
+import imageBackground from '../../../assets/images/new_background.jpg'
 import Services from '../services'
 import Swipe from '../swipe'
 import Top from '../top'
@@ -25,9 +25,6 @@ class NavigationDrawerStructure extends Component {
             style={styles.drawerImage}
           />
         </TouchableOpacity>
-        <ImageBackground source={imageBackground}
-           style={styles.topImageBackground}>
-        </ImageBackground>
       </View>
     );
   }
@@ -37,25 +34,28 @@ class Dashboard extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <TouchableOpacity>
-          <Image source={walletImage}
-            style={styles.walletImage}>
-          </Image>
-        </TouchableOpacity>
-        <View style={styles.innerContainer}>
-            <TouchableOpacity>
-                <Image source={require('../../../assets/images/swipe.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Image source={require('../../../assets/images/transfer.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Image source={require('../../../assets/images/services.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Image source={require('../../../assets/images/topup.png')}/>
-            </TouchableOpacity>
-        </View>
+        <ImageBackground source={imageBackground}
+           style={styles.topImageBackground}>
+          <TouchableOpacity>
+            <Image source={walletImage}
+              style={styles.walletImage}>
+            </Image>
+          </TouchableOpacity>
+          <View style={styles.innerContainer}>
+              <TouchableOpacity>
+                  <Image source={require('../../../assets/images/swipe.png')}/>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                  <Image source={require('../../../assets/images/transfer.png')}/>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                  <Image source={require('../../../assets/images/services.png')}/>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                  <Image source={require('../../../assets/images/topup.png')}/>
+              </TouchableOpacity>
+          </View>
+        </ImageBackground>
       </View>
     )
   }

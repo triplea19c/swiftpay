@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
       color: '#ffffff',
       textAlign: 'center'
     },
+    loginText: {
+      textAlign: 'center',
+      marginTop: 20
+    },
     imageBackground: {
       width: '100%',
       height: '100%',

@@ -49,6 +49,7 @@ class LoginScreen extends Component {
                         <Text style={styles.loginText}>LOGIN</Text>
                     </TouchableOpacity>
                 </View>
+                <Text style={styles.signupText} onPress={() => this.props.navigation.navigate('Signup')}>Don't have an account?</Text>
             </View>
        </KeyboardAvoidingView>
     </DismissKeyboard>
