@@ -8,10 +8,6 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center'
     },
-    image: {
-      width: width - 150,
-      height: height - 525
-    },
     welcomeText: {
       fontSize: 24,
       marginBottom: 20

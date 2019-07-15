@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { TextField } from 'react-native-material-textfield';
-import { Text, View, Image, TouchableOpacity, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { Text, View, Image, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import image from '../../../assets/images/swiftpaylogo.png'
 import styles from './styles'
 import { createStackNavigator, createAppContainer } from "react-navigation";

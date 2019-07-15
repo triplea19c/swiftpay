@@ -4,7 +4,7 @@ const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
     welcomeText: {
-      color: 'red',
+      color: 'black',
       fontSize: 20,
       textAlign: 'center'
     },

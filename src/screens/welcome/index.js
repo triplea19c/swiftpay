@@ -9,7 +9,7 @@ import SignupScreen from '../signup'
 const HomeScreen = ({ navigation }) => {
     return(
         <View style={styles.container}>
-            <Image source={image} style={styles.image}>
+            <Image source={image}>
             </Image>
             <Text style={styles.welcomeText}>
               Welcome to Convenience
