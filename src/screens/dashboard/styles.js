@@ -21,11 +21,22 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       justifyContent: 'center'
     },
-    innerContainer: {
+    outerContainer: {
       flexDirection: 'row',
       flex: 4,
       justifyContent: 'space-evenly'
+    },
+    textContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-evenly'
+    },
+    text: {
+      color: 'red'
+    },
+    favorites: {
+      color: 'red',
+      flex: 5,
+      textAlign: 'center'
     }
   })
-
   export default styles

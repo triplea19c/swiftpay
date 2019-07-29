@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, TouchableOpacity, ImageBackground } from 'react-native'
+import { View, Image, Text, TouchableOpacity, ImageBackground } from 'react-native'
 import imageBackground from '../../../assets/images/new_background.jpg'
 import Services from '../services'
 import Swipe from '../swipe'
@@ -41,19 +41,54 @@ class Dashboard extends Component {
               style={styles.walletImage}>
             </Image>
           </TouchableOpacity>
-          <View style={styles.innerContainer}>
-              <TouchableOpacity>
+          <View style={styles.outerContainer}>
+              <View style={styles.innerContainer}>
+                <TouchableOpacity>
                   <Image source={require('../../../assets/images/swipe.png')}/>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                  <Image source={require('../../../assets/images/transfer.png')}/>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                  <Image source={require('../../../assets/images/services.png')}/>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                  <Image source={require('../../../assets/images/topup.png')}/>
-              </TouchableOpacity>
+                </TouchableOpacity>
+                <Text style={styles.text}>SWIPE TO PAY</Text>
+              </View>
+              <View style={styles.innerContainer}>
+                <TouchableOpacity>
+                    <Image source={require('../../../assets/images/transfer.png')}/>
+                </TouchableOpacity>
+                <Text style={styles.text}>TRANSFER</Text>
+              </View>
+              <View style={styles.innerContainer}>
+                <TouchableOpacity>
+                    <Image source={require('../../../assets/images/services.png')}/>
+                </TouchableOpacity>
+                <Text style={styles.text}>SERVICES</Text>
+              </View>
+              <View style={styles.innerContainer}>
+                <TouchableOpacity>
+                    <Image source={require('../../../assets/images/topup.png')}/>
+                </TouchableOpacity>
+                <Text style={styles.text}>TOP-UP</Text>
+              </View>
+          </View>
+          <Text style={styles.favorites}>MY FAVORITES</Text>
+          <View style={styles.outerContainer}>
+              <View style={styles.innerContainer}>
+                <TouchableOpacity>
+                  <Image source={require('../../../assets/images/mtn.png')}/>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.innerContainer}>
+                {/* <TouchableOpacity style={styles.ssnitBackground}>
+                    <Image source={require('../../../assets/images/ssnit.jpg')}/>
+                </TouchableOpacity> */}
+              </View>
+              <View style={styles.innerContainer}>
+                {/* <TouchableOpacity style={styles.vodaBackground}>
+                    <Image source={require('../../../assets/images/voda.png')}/>
+                </TouchableOpacity> */}
+              </View>
+              <View style={styles.innerContainer}>
+                {/* <TouchableOpacity style={styles.pdsBackground}>
+                    <Image source={require('../../../assets/images/pds.png')}/>
+                </TouchableOpacity> */}
+              </View>
           </View>
         </ImageBackground>
       </View>

@@ -1,4 +1,7 @@
 {
   "name": "swiftpay",
-  "displayName": "swiftpay"
+  "displayName": "swiftpay",
+  "splash":{
+    "image":"./assets/images/swiftsplash.png"
+  }
 }
