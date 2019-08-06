@@ -67,7 +67,7 @@ class Dashboard extends Component {
                 <Text style={styles.text}>TOP-UP</Text>
               </View>
           </View>
-          <Text style={styles.favorites}>MY FAVORITES</Text>
+          {/* <Text style={styles.favorites}>MY FAVORITES</Text>
           <View style={styles.outerContainer}>
               <View style={styles.innerContainer}>
                 <TouchableOpacity>
@@ -75,21 +75,21 @@ class Dashboard extends Component {
                 </TouchableOpacity>
               </View>
               <View style={styles.innerContainer}>
-                {/* <TouchableOpacity style={styles.ssnitBackground}>
+                <TouchableOpacity style={styles.ssnitBackground}>
                     <Image source={require('../../../assets/images/ssnit.jpg')}/>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
               </View>
               <View style={styles.innerContainer}>
-                {/* <TouchableOpacity style={styles.vodaBackground}>
+                <TouchableOpacity style={styles.vodaBackground}>
                     <Image source={require('../../../assets/images/voda.png')}/>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
               </View>
               <View style={styles.innerContainer}>
-                {/* <TouchableOpacity style={styles.pdsBackground}>
+                <TouchableOpacity style={styles.pdsBackground}>
                     <Image source={require('../../../assets/images/pds.png')}/>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
               </View>
-          </View>
+          </View> */}
         </ImageBackground>
       </View>
     )
