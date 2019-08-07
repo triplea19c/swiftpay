@@ -3,6 +3,8 @@ import { TextField } from 'react-native-material-textfield';
 import { Text, View, ImageBackground, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import imageBackground from '../../../assets/images/background.png'
 import styles from './styles'
+import validate from './validate_wrapper'
+import validation from 'validation'
 
 const DismissKeyboard = (props) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -15,10 +17,26 @@ export default class SignupScreen extends Component {
     super(props)
     this.state = {
       email: "",
+      emailError: '',
       phone: "",
       password: "",
+      passwordError: '',
       confirmpassword: "",
       fullname: ""
+    }
+  }
+
+  register() {
+    const emailError = validate('email', this.state.email)
+    const passwordError = validate('password', this.state.password)
+
+    this.setState({
+      emailError: emailError,
+      passwordError: passwordError
+    })
+
+    if (!emailError && !passwordError) {
+      alert('Details are valid!')
     }
   }
 
@@ -56,7 +74,14 @@ export default class SignupScreen extends Component {
                 <TextField
                   label='Password'
                   value={password}
-                  onChangeText={ (password) => this.setState({ password })}
+                  onChangeText={value => this.setState({password: value.trim()})}
+                  onBlur={() => {
+                    this.setState({
+                      passwordError: validate('password', this.state.password)
+                    })
+                  }}
+                  error={this.state.passwordError}
+                  secureTextEntry={true}
                 />
                 <TextField
                   label='Confirm Password'
@@ -64,7 +89,7 @@ export default class SignupScreen extends Component {
                   onChangeText={ (confirmpassword) => this.setState({ confirmpassword })}
                 />
                 <View style={styles.button}>
-                  <TouchableOpacity style={styles.signupButton} onPress={() => this.props.navigation.navigate('Dashboard')}>
+                  <TouchableOpacity style={styles.signupButton} onPress={this.validateRegister}>
                     <Text style={styles.signupText}>SIGN UP</Text>
                   </TouchableOpacity>
                 </View>
