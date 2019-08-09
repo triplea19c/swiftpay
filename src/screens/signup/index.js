@@ -4,7 +4,6 @@ import { Text, View, ImageBackground, TouchableOpacity, KeyboardAvoidingView, To
 import imageBackground from '../../../assets/images/background.png'
 import styles from './styles'
 import validate from './validate_wrapper'
-import validation from 'validation'
 
 const DismissKeyboard = (props) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -16,26 +15,34 @@ export default class SignupScreen extends Component {
   constructor(props){
     super(props)
     this.state = {
+      fullname: "",
+      fullnameError: "",
       email: "",
       emailError: '',
       phone: "",
+      phoneError: "",
       password: "",
-      passwordError: '',
+      passwordError: "",
       confirmpassword: "",
-      fullname: ""
+      confirmpasswordError: ""
     }
   }
 
   register() {
+    const fullnameError = validate('fullname', this.state.fullname)
     const emailError = validate('email', this.state.email)
+    const phoneError = validate('phone', this.state.phone)
     const passwordError = validate('password', this.state.password)
-
+    const confirmpasswordError = validate('confirmpassword', this.state.confirmpassword)
     this.setState({
+      fullnameError: fullnameError,
       emailError: emailError,
-      passwordError: passwordError
+      phoneError: phoneError,
+      passwordError: passwordError,
+      confirmpasswordError: confirmpasswordError
     })
 
-    if (!emailError && !passwordError) {
+    if (!fullnameError && !emailError && !phoneError && !passwordError && !confirmpasswordError) {
       alert('Details are valid!')
     }
   }
@@ -60,16 +67,34 @@ export default class SignupScreen extends Component {
                   label='Fullname'
                   value={fullname}
                   onChangeText={ (fullname) => this.setState({ fullname })}
+                  onBlur={() => {
+                    this.setState({
+                      fullnameError: validate('fullname', this.state.fullname)
+                    })
+                  }}
+                  error={this.state.fullnameError}
                 />
                 <TextField
                   label='Email'
                   value={email}
                   onChangeText={ (email) => this.setState({ email })}
+                  onBlur={() => {
+                    this.setState({
+                      emailError: validate('email', this.state.email)
+                    })
+                  }}
+                  error={this.state.emailError}
                 />
                 <TextField
                   label='Phone number'
                   value={phone}
                   onChangeText={ (phone) => this.setState({ phone })}
+                  onBlur={() => {
+                    this.setState({
+                      phoneError: validate('phone', this.state.phone)
+                    })
+                  }}
+                  error={this.state.phoneError}
                 />
                 <TextField
                   label='Password'
@@ -87,6 +112,13 @@ export default class SignupScreen extends Component {
                   label='Confirm Password'
                   value={confirmpassword}
                   onChangeText={ (confirmpassword) => this.setState({ confirmpassword })}
+                  onBlur={() => {
+                    this.setState({
+                      confirmpasswordError: validate('confirmpassword', this.state.confirmpassword)
+                    })
+                  }}
+                  error={this.state.confirmpasswordError}
+                  secureTextEntry={true}
                 />
                 <View style={styles.button}>
                   <TouchableOpacity style={styles.signupButton} onPress={this.validateRegister}>

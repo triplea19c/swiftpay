@@ -1,4 +1,5 @@
-import validation from 'validation.js'
+import validation from './validation'
+import validatejs from 'validate.js'
 
 export default function validate(fieldName, value) {
   // Validate.js validates your values as an object
@@ -15,7 +16,7 @@ export default function validate(fieldName, value) {
   //                         }
   //                       }
   var formFields = {}
-  formFields[fieldName] = validation[field]
+  formFields[fieldName] = validation[fieldName]
 
   
   // The formValues and validated against the formFields
@@ -25,7 +26,7 @@ export default function validate(fieldName, value) {
   // If there is an error message, return it!
   if (result) {
     // Return only the field error message if there are multiple
-    return result[field][0]
+    return result[fieldName][0]
   }
 
   return null

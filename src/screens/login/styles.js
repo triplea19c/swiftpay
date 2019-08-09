@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     },
     image: {
       width: width - 150,
-      height: height - 525,
+      height: height - 325,
     },
     welcomeText: {
       fontSize: 16,
