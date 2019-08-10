@@ -4,6 +4,7 @@ import { Text, View, ImageBackground, TouchableOpacity, KeyboardAvoidingView, To
 import imageBackground from '../../../assets/images/background.png'
 import styles from './styles'
 import validate from './validate_wrapper'
+import validatePassword from "./validate_password"
 
 const DismissKeyboard = (props) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -26,14 +27,15 @@ export default class SignupScreen extends Component {
       confirmpassword: "",
       confirmpasswordError: ""
     }
+  //  this.register = this.register.bind(this)
   }
 
-  register() {
+  register=()=> {
     const fullnameError = validate('fullname', this.state.fullname)
     const emailError = validate('email', this.state.email)
     const phoneError = validate('phone', this.state.phone)
     const passwordError = validate('password', this.state.password)
-    const confirmpasswordError = validate('confirmpassword', this.state.confirmpassword)
+    const confirmpasswordError = validatePassword(this.state.password, this.state.confirmpassword)
     this.setState({
       fullnameError: fullnameError,
       emailError: emailError,
@@ -43,7 +45,7 @@ export default class SignupScreen extends Component {
     })
 
     if (!fullnameError && !emailError && !phoneError && !passwordError && !confirmpasswordError) {
-      alert('Details are valid!')
+      this.props.navigation.navigate("Dashboard")
     }
   }
 
@@ -114,14 +116,14 @@ export default class SignupScreen extends Component {
                   onChangeText={ (confirmpassword) => this.setState({ confirmpassword })}
                   onBlur={() => {
                     this.setState({
-                      confirmpasswordError: validate('confirmpassword', this.state.confirmpassword)
+                      confirmpasswordError: validatePassword(this.state.password, this.state.confirmpassword)
                     })
                   }}
                   error={this.state.confirmpasswordError}
                   secureTextEntry={true}
                 />
                 <View style={styles.button}>
-                  <TouchableOpacity style={styles.signupButton} onPress={this.validateRegister}>
+                  <TouchableOpacity style={styles.signupButton} onPress={this.register}>
                     <Text style={styles.signupText}>SIGN UP</Text>
                   </TouchableOpacity>
                 </View>
