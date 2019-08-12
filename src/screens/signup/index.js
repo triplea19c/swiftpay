@@ -15,6 +15,7 @@ import validate from "./validate_wrapper";
 import validatePassword from "./validate_password";
 import { db } from "../../config";
 import firebase from "firebase";
+import "firebase/firebase-firestore";
 
 let addUser = user => {
   db.ref("/users").push(user);
@@ -71,6 +72,13 @@ export default class SignupScreen extends Component {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(user => {
+          return firebase
+            .firestore()
+            .collection("Users")
+            .doc(user.user.uid)
+            .set({});
+        })
         .then(() => {
           this.props.navigation.navigate("Dashboard");
         })
