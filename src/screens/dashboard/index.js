@@ -1,13 +1,23 @@
-import React, { Component } from 'react'
-import { View, Image, Text, TouchableOpacity, ImageBackground } from 'react-native'
-import imageBackground from '../../../assets/images/new_background.jpg'
-import Services from '../services'
-import Swipe from '../swipe'
-import Top from '../top'
-import Transfer from '../transfer'
-import { createDrawerNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
-import styles from './styles'
-import walletImage from '../../../assets/images/wallet.png'
+import React, { Component } from "react";
+import {
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  ImageBackground
+} from "react-native";
+import imageBackground from "../../../assets/images/new_background.jpg";
+import Services from "../services";
+import Swipe from "../swipe";
+import Top from "../top";
+import Transfer from "../transfer";
+import {
+  createDrawerNavigator,
+  createStackNavigator,
+  createAppContainer
+} from "react-navigation";
+import styles from "./styles";
+import walletImage from "../../../assets/images/wallet.png";
 
 class NavigationDrawerStructure extends Component {
   //Structure for the navigating Drawer
@@ -21,7 +31,7 @@ class NavigationDrawerStructure extends Component {
         <TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
           {/* Donute Button Image */}
           <Image
-            source={require('../../../assets/images/drawer.png')}
+            source={require("../../../assets/images/drawer.png")}
             style={styles.drawerImage}
           />
         </TouchableOpacity>
@@ -34,65 +44,69 @@ class Dashboard extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <ImageBackground source={imageBackground}
-           style={styles.topImageBackground}>
+        <ImageBackground
+          source={imageBackground}
+          style={styles.topImageBackground}
+        >
           <TouchableOpacity>
-            <Image source={walletImage}
-              style={styles.walletImage}>
-            </Image>
+            <Image source={walletImage} style={styles.walletImage} />
           </TouchableOpacity>
           <View style={styles.outerContainer}>
-              <View style={styles.innerContainer}>
-                <TouchableOpacity>
-                  <Image source={require('../../../assets/images/swipe.png')}/>
-                </TouchableOpacity>
-                <Text style={styles.text}>SWIPE TO PAY</Text>
-              </View>
-              <View style={styles.innerContainer}>
-                <TouchableOpacity>
-                    <Image source={require('../../../assets/images/transfer.png')}/>
-                </TouchableOpacity>
-                <Text style={styles.text}>TRANSFER</Text>
-              </View>
-              <View style={styles.innerContainer}>
-                <TouchableOpacity>
-                    <Image source={require('../../../assets/images/services.png')}/>
-                </TouchableOpacity>
-                <Text style={styles.text}>SERVICES</Text>
-              </View>
-              <View style={styles.innerContainer}>
-                <TouchableOpacity>
-                    <Image source={require('../../../assets/images/topup.png')}/>
-                </TouchableOpacity>
-                <Text style={styles.text}>TOP-UP</Text>
-              </View>
+            <View style={styles.innerContainer}>
+              <TouchableOpacity>
+                <Image source={require("../../../assets/images/swipe.png")} />
+              </TouchableOpacity>
+              <Text style={styles.text}>SWIPE TO PAY</Text>
+            </View>
+            <View style={styles.innerContainer}>
+              <TouchableOpacity>
+                <Image
+                  source={require("../../../assets/images/transfer.png")}
+                />
+              </TouchableOpacity>
+              <Text style={styles.text}>TRANSFER</Text>
+            </View>
+            <View style={styles.innerContainer}>
+              <TouchableOpacity>
+                <Image
+                  source={require("../../../assets/images/services.png")}
+                />
+              </TouchableOpacity>
+              <Text style={styles.text}>SERVICES</Text>
+            </View>
+            <View style={styles.innerContainer}>
+              <TouchableOpacity>
+                <Image source={require("../../../assets/images/topup.png")} />
+              </TouchableOpacity>
+              <Text style={styles.text}>TOP-UP</Text>
+            </View>
           </View>
-          {/* <Text style={styles.favorites}>MY FAVORITES</Text>
+          <Text style={styles.favorites}>MY FAVORITES</Text>
           <View style={styles.outerContainer}>
-              <View style={styles.innerContainer}>
-                <TouchableOpacity>
-                  <Image source={require('../../../assets/images/mtn.png')}/>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.innerContainer}>
-                <TouchableOpacity style={styles.ssnitBackground}>
-                    <Image source={require('../../../assets/images/ssnit.jpg')}/>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.innerContainer}>
-                <TouchableOpacity style={styles.vodaBackground}>
-                    <Image source={require('../../../assets/images/voda.png')}/>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.innerContainer}>
-                <TouchableOpacity style={styles.pdsBackground}>
-                    <Image source={require('../../../assets/images/pds.png')}/>
-                </TouchableOpacity>
-              </View>
-          </View> */}
+            <View style={styles.innerMtnContainer}>
+              <TouchableOpacity>
+                <Image source={require("../../../assets/images/mtn.png")} />
+              </TouchableOpacity>
+            </View>
+            {/* // <View style={styles.innerContainer}>
+            //   <TouchableOpacity style={styles.ssnitBackground}>
+            //     <Image source={require("../../../assets/images/ssnit.jpg")} />
+            //   </TouchableOpacity>
+            // </View>
+            // <View style={styles.innerContainer}>
+            //   <TouchableOpacity style={styles.vodaBackground}>
+            //     <Image source={require("../../../assets/images/voda.png")} />
+            //   </TouchableOpacity>
+            // </View>
+            // <View style={styles.innerContainer}>
+            //   <TouchableOpacity style={styles.pdsBackground}>
+            //     <Image source={require("../../../assets/images/pds.png")} />
+            //   </TouchableOpacity>
+            // </View> */}
+          </View>
         </ImageBackground>
       </View>
-    )
+    );
   }
 }
 
@@ -101,14 +115,14 @@ const FirstActivity_StackNavigator = createStackNavigator({
   First: {
     screen: Dashboard,
     navigationOptions: ({ navigation }) => ({
-      title: 'Dashboard',
+      title: "Dashboard",
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: "#FFFFFF"
       },
-      headerTintColor: '#fff',
-    }),
-  },
+      headerTintColor: "#fff"
+    })
+  }
 });
 
 const Screen1_StackNavigator = createStackNavigator({
@@ -116,14 +130,14 @@ const Screen1_StackNavigator = createStackNavigator({
   First: {
     screen: Swipe,
     navigationOptions: ({ navigation }) => ({
-      title: 'Swipe To Pay',
+      title: "Swipe To Pay",
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: "#FFFFFF"
       },
-      headerTintColor: '#fff',
-    }),
-  },
+      headerTintColor: "#fff"
+    })
+  }
 });
 
 const Screen2_StackNavigator = createStackNavigator({
@@ -131,14 +145,14 @@ const Screen2_StackNavigator = createStackNavigator({
   Second: {
     screen: Transfer,
     navigationOptions: ({ navigation }) => ({
-      title: 'Transfer',
+      title: "Transfer",
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: "#FFFFFF"
       },
-      headerTintColor: '#fff',
-    }),
-  },
+      headerTintColor: "#fff"
+    })
+  }
 });
 
 const Screen3_StackNavigator = createStackNavigator({
@@ -146,14 +160,14 @@ const Screen3_StackNavigator = createStackNavigator({
   Third: {
     screen: Services,
     navigationOptions: ({ navigation }) => ({
-      title: 'Services',
+      title: "Services",
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: "#FFFFFF"
       },
-      headerTintColor: '#fff',
-    }),
-  },
+      headerTintColor: "#fff"
+    })
+  }
 });
 
 const Screen4_StackNavigator = createStackNavigator({
@@ -161,14 +175,14 @@ const Screen4_StackNavigator = createStackNavigator({
   Third: {
     screen: Top,
     navigationOptions: ({ navigation }) => ({
-      title: 'Top Up',
+      title: "Top Up",
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: "#FFFFFF"
       },
-      headerTintColor: '#fff',
-    }),
-  },
+      headerTintColor: "#fff"
+    })
+  }
 });
 
 const DrawerNavigatorExample = createDrawerNavigator({
@@ -177,37 +191,37 @@ const DrawerNavigatorExample = createDrawerNavigator({
     //Title
     screen: FirstActivity_StackNavigator,
     navigationOptions: {
-      drawerLabel: 'Dashboard',
-    },
+      drawerLabel: "Dashboard"
+    }
   },
   Swipe: {
     //Title
     screen: Screen1_StackNavigator,
     navigationOptions: {
-      drawerLabel: 'Swipe To Pay',
-    },
+      drawerLabel: "Swipe To Pay"
+    }
   },
   Transfer: {
     //Title
     screen: Screen2_StackNavigator,
     navigationOptions: {
-      drawerLabel: 'Transfer',
-    },
+      drawerLabel: "Transfer"
+    }
   },
   Services: {
     //Title
     screen: Screen3_StackNavigator,
     navigationOptions: {
-      drawerLabel: 'Services',
-    },
+      drawerLabel: "Services"
+    }
   },
   Top: {
     //Title
     screen: Screen4_StackNavigator,
     navigationOptions: {
-      drawerLabel: 'Top Up',
-    },
+      drawerLabel: "Top Up"
+    }
   }
 });
 
-export default createAppContainer(DrawerNavigatorExample)
+export default createAppContainer(DrawerNavigatorExample);
