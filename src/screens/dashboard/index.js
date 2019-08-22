@@ -10,7 +10,6 @@ import imageBackground from "../../../assets/images/new_background.jpg";
 import Services from "../services";
 import Swipe from "../swipe";
 import Top from "../top";
-import Transfer from "../transfer";
 import {
   createDrawerNavigator,
   createStackNavigator,
@@ -18,6 +17,8 @@ import {
 } from "react-navigation";
 import styles from "./styles";
 import walletImage from "../../../assets/images/wallet.png";
+import Signup from "./../signup";
+import Transaction from "./../transaction";
 
 class NavigationDrawerStructure extends Component {
   //Structure for the navigating Drawer
@@ -52,21 +53,23 @@ class Dashboard extends Component {
             <Image source={walletImage} style={styles.walletImage} />
           </TouchableOpacity>
           <View style={styles.outerContainer}>
-            <View style={styles.innerContainer}>
+            <View>
               <TouchableOpacity>
                 <Image source={require("../../../assets/images/swipe.png")} />
               </TouchableOpacity>
               <Text style={styles.text}>SWIPE TO PAY</Text>
             </View>
-            <View style={styles.innerContainer}>
-              <TouchableOpacity>
+            <View>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("Transaction")}
+              >
                 <Image
                   source={require("../../../assets/images/transfer.png")}
                 />
               </TouchableOpacity>
               <Text style={styles.text}>TRANSFER</Text>
             </View>
-            <View style={styles.innerContainer}>
+            <View>
               <TouchableOpacity>
                 <Image
                   source={require("../../../assets/images/services.png")}
@@ -74,43 +77,43 @@ class Dashboard extends Component {
               </TouchableOpacity>
               <Text style={styles.text}>SERVICES</Text>
             </View>
-            <View style={styles.innerContainer}>
+            <View>
               <TouchableOpacity>
                 <Image source={require("../../../assets/images/topup.png")} />
               </TouchableOpacity>
               <Text style={styles.text}>TOP-UP</Text>
             </View>
           </View>
-          <Text style={styles.favorites}>MY FAVORITES</Text>
+          {/* <Text style={styles.favorites}>MY FAVORITES</Text>
           <View style={styles.outerContainer}>
             <View style={styles.innerMtnContainer}>
               <TouchableOpacity>
                 <Image source={require("../../../assets/images/mtn.png")} />
               </TouchableOpacity>
             </View>
-            {/* // <View style={styles.innerContainer}>
-            //   <TouchableOpacity style={styles.ssnitBackground}>
-            //     <Image source={require("../../../assets/images/ssnit.jpg")} />
-            //   </TouchableOpacity>
-            // </View>
-            // <View style={styles.innerContainer}>
-            //   <TouchableOpacity style={styles.vodaBackground}>
-            //     <Image source={require("../../../assets/images/voda.png")} />
-            //   </TouchableOpacity>
-            // </View>
-            // <View style={styles.innerContainer}>
-            //   <TouchableOpacity style={styles.pdsBackground}>
-            //     <Image source={require("../../../assets/images/pds.png")} />
-            //   </TouchableOpacity>
-            // </View> */}
-          </View>
+            <View style={styles.innerContainer}>
+               <TouchableOpacity style={styles.ssnitBackground}>
+                 <Image source={require("../../../assets/images/ssnit.jpg")} />
+               </TouchableOpacity>
+            </View>
+             <View style={styles.innerContainer}>
+               <TouchableOpacity style={styles.vodaBackground}>
+                <Image source={require("../../../assets/images/voda.png")} />
+               </TouchableOpacity>
+             </View>
+             <View style={styles.innerContainer}>
+               <TouchableOpacity style={styles.pdsBackground}>
+                 <Image source={require("../../../assets/images/pds.png")} />
+               </TouchableOpacity>
+             </View>
+          </View> */}
         </ImageBackground>
       </View>
     );
   }
 }
 
-const FirstActivity_StackNavigator = createStackNavigator({
+const Screen_StackNavigator = createStackNavigator({
   //All the screen from the First Screen will be indexed here
   First: {
     screen: Dashboard,
@@ -127,7 +130,7 @@ const FirstActivity_StackNavigator = createStackNavigator({
 
 const Screen1_StackNavigator = createStackNavigator({
   //All the screen from the Screen1 will be indexed here
-  First: {
+  Second: {
     screen: Swipe,
     navigationOptions: ({ navigation }) => ({
       title: "Swipe To Pay",
@@ -142,8 +145,8 @@ const Screen1_StackNavigator = createStackNavigator({
 
 const Screen2_StackNavigator = createStackNavigator({
   //All the screen from the Screen2 will be indexed here
-  Second: {
-    screen: Transfer,
+  Third: {
+    screen: Transaction,
     navigationOptions: ({ navigation }) => ({
       title: "Transfer",
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
@@ -157,7 +160,7 @@ const Screen2_StackNavigator = createStackNavigator({
 
 const Screen3_StackNavigator = createStackNavigator({
   //All the screen from the Screen3 will be indexed here
-  Third: {
+  Fourth: {
     screen: Services,
     navigationOptions: ({ navigation }) => ({
       title: "Services",
@@ -172,7 +175,7 @@ const Screen3_StackNavigator = createStackNavigator({
 
 const Screen4_StackNavigator = createStackNavigator({
   //All the screen from the Screen4 will be indexed here
-  Third: {
+  Fifth: {
     screen: Top,
     navigationOptions: ({ navigation }) => ({
       title: "Top Up",
@@ -185,11 +188,25 @@ const Screen4_StackNavigator = createStackNavigator({
   }
 });
 
+const Screen5_StackNavigator = createStackNavigator({
+  //All the screen from the Screen4 will be indexed here
+  Sixth: {
+    screen: Signup,
+    navigationOptions: ({ navigation }) => ({
+      title: "Logout",
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: "#FFFFFF"
+      },
+      headerTintColor: "#fff"
+    })
+  }
+});
 const DrawerNavigatorExample = createDrawerNavigator({
   //Drawer Optons and indexing
   Dashboard: {
     //Title
-    screen: FirstActivity_StackNavigator,
+    screen: Screen_StackNavigator,
     navigationOptions: {
       drawerLabel: "Dashboard"
     }
@@ -201,7 +218,7 @@ const DrawerNavigatorExample = createDrawerNavigator({
       drawerLabel: "Swipe To Pay"
     }
   },
-  Transfer: {
+  Transaction: {
     //Title
     screen: Screen2_StackNavigator,
     navigationOptions: {
@@ -220,6 +237,13 @@ const DrawerNavigatorExample = createDrawerNavigator({
     screen: Screen4_StackNavigator,
     navigationOptions: {
       drawerLabel: "Top Up"
+    }
+  },
+  Signup: {
+    //Title
+    screen: Screen5_StackNavigator,
+    navigationOptions: {
+      drawerLabel: "Logout"
     }
   }
 });

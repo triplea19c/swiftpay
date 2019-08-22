@@ -5,6 +5,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import styles from "./styles";
 import LoginScreen from "../login";
 import SignupScreen from "../signup";
+import TransactionScreen from "../transaction";
 // import PayScreen from "../pay";
 
 const HomeScreen = ({ navigation }) => {
@@ -35,7 +36,8 @@ const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     Login: LoginScreen,
-    Signup: SignupScreen
+    Signup: SignupScreen,
+    Transaction: TransactionScreen
     // Pay: PayScreen
   },
   {

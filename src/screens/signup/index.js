@@ -45,6 +45,18 @@ export default class SignupScreen extends Component {
     //  this.register = this.register.bind(this)
   }
 
+  componentDidMount() {
+    if (firebase.auth()) {
+      firebase
+        .auth()
+        .signOut()
+        .then(res => {
+          console.log("signed out");
+        })
+        .catch(error => console.log(error));
+    }
+  }
+
   register = () => {
     const fullnameError = validate("fullname", this.state.fullname);
     const emailError = validate("email", this.state.email);

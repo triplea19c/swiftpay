@@ -22,13 +22,13 @@ const DismissKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 );
 
-class LoginScreen extends Component {
+export class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      email: "andy1@andy.com",
       emailError: "",
-      password: "",
+      password: "123456",
       passwordError: ""
     };
   }
