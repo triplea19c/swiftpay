@@ -17,6 +17,8 @@ import { db } from "../../config";
 import firebase from "firebase";
 import "firebase/firebase-firestore";
 
+const ROOT_URL = "https://824bc8bf.ngrok.io/api/v1/";
+
 let addUser = user => {
   db.ref("/users").push(user);
 };
@@ -31,7 +33,8 @@ export default class SignupScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullname: "",
+      firstname: "",
+      lastname: "",
       fullnameError: "",
       email: "",
       emailError: "",
@@ -45,84 +48,47 @@ export default class SignupScreen extends Component {
     //  this.register = this.register.bind(this)
   }
 
-  componentDidMount() {
-    if (firebase.auth()) {
-      firebase
-        .auth()
-        .signOut()
-        .then(res => {
-          console.log("signed out");
+  postRegister = async () => {
+    try {
+      var data = {
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        email: this.state.email,
+        mobile_number: this.state.phone,
+        password: this.state.password,
+        c_password: this.state.confirmpassword
+      };
+      // console.log(data);
+      var request = new Request(ROOT_URL + "register", {
+        method: "POST",
+        headers: new Headers({
+          "X-Requested-With": "XMLHttpRequest",
+          "Content-Type": "application/x-www-form-urlencoded"
+        }),
+        body: JSON.stringify({
+          firstname: this.state.firstname,
+          lastname: this.state.lastname,
+          email: this.state.email,
+          mobile_number: this.state.phone,
+          password: this.state.password,
+          c_password: this.state.confirmpassword
         })
-        .catch(error => console.log(error));
+      });
+      console.log(request);
+      const registerRequest = await fetch(request);
+      const register = await registerRequest.json();
+      if (register) {
+        console.log(register);
+      }
+      console.log(register);
+    } catch (err) {
+      console.log("Error fetching data-----------", err);
     }
-  }
-
-  register = () => {
-    const fullnameError = validate("fullname", this.state.fullname);
-    const emailError = validate("email", this.state.email);
-    const phoneError = validate("phone", this.state.phone);
-    const passwordError = validate("password", this.state.password);
-    const confirmpasswordError = validatePassword(
-      this.state.password,
-      this.state.confirmpassword
-    );
-    this.setState({
-      fullnameError: fullnameError,
-      emailError: emailError,
-      phoneError: phoneError,
-      passwordError: passwordError,
-      confirmpasswordError: confirmpasswordError
-    });
-
-    if (
-      !fullnameError &&
-      !emailError &&
-      !phoneError &&
-      !passwordError &&
-      !confirmpasswordError
-    ) {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then(user => {
-          return firebase
-            .firestore()
-            .collection("Users")
-            .doc(user.user.uid)
-            .set({});
-        })
-        .then(() => {
-          this.props.navigation.navigate("Dashboard");
-        })
-        .catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          if (errorCode == "auth/weak-password") {
-            alert("The password is too weak.");
-          } else {
-            alert(errorMessage);
-          }
-          console.log(error);
-        });
-    }
-  };
-
-  handleSubmit = () => {
-    let user = {
-      fullname: this.state.fullname,
-      email: this.state.email,
-      phone: this.state.phone,
-      password: this.state.password,
-      confirmpassword: this.state.confirmpassword
-    };
-    console.log(user);
-    addUser(user);
-    alert("User details successfully saved");
   };
 
   render() {
-    let { fullname } = this.state;
+    let { firstname } = this.state;
+    let { lastname } = this.state;
     let { email } = this.state;
     let { phone } = this.state;
     let { password } = this.state;
@@ -138,15 +104,26 @@ export default class SignupScreen extends Component {
             <View style={styles.container}>
               <Text style={styles.welcomeText}>Akwaaba</Text>
               <TextField
-                label="Fullname"
-                value={fullname}
-                onChangeText={fullname => this.setState({ fullname })}
+                label="First name"
+                value={firstname}
+                onChangeText={firstname => this.setState({ firstname })}
                 onBlur={() => {
                   this.setState({
-                    fullnameError: validate("fullname", this.state.fullname)
+                    firstnameError: validate("firstname", this.state.firstname)
                   });
                 }}
-                error={this.state.fullnameError}
+                error={this.state.firstnameError}
+              />
+              <TextField
+                label="Last name"
+                value={lastname}
+                onChangeText={lastname => this.setState({ lastname })}
+                onBlur={() => {
+                  this.setState({
+                    lastnameError: validate("lastname", this.state.lastname)
+                  });
+                }}
+                error={this.state.lastnameError}
               />
               <TextField
                 label="Email"
@@ -204,7 +181,7 @@ export default class SignupScreen extends Component {
               <View style={styles.button}>
                 <TouchableOpacity
                   style={styles.signupButton}
-                  onPress={this.register}
+                  onPress={this.postRegister}
                 >
                   <Text style={styles.signupText}>SIGN UP</Text>
                 </TouchableOpacity>
