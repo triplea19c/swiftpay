@@ -13,6 +13,8 @@ import image from "../../../assets/images/swiftpaylogo.png";
 import styles from "./styles";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import DashboardScreen from "../dashboard";
+import mtnMomoScreen from "../mtnMomo";
+import vodafoneCashScreen from "../vodafoneCash";
 import validate from "../signup/validate_wrapper";
 import firebase from "firebase";
 
@@ -117,7 +119,9 @@ export class LoginScreen extends Component {
 const AppNavigator = createStackNavigator(
   {
     Login: LoginScreen,
-    Dashboard: DashboardScreen
+    Dashboard: DashboardScreen,
+    mtnMomo: mtnMomoScreen,
+    vodafoneCash: vodafoneCashScreen
   },
   {
     initialRouteName: "Login",

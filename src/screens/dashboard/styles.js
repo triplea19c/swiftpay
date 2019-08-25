@@ -46,6 +46,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     position: "relative",
     bottom: 10
+  },
+  walletImage: {
+    marginBottom: 50,
+    marginTop: 50
   }
 });
 export default styles;

@@ -5,7 +5,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import styles from "./styles";
 import LoginScreen from "../login";
 import SignupScreen from "../signup";
-import TransactionScreen from "../transaction";
+import TransferScreen from "../transfer";
 // import PayScreen from "../pay";
 
 const HomeScreen = ({ navigation }) => {
@@ -37,7 +37,7 @@ const AppNavigator = createStackNavigator(
     Home: HomeScreen,
     Login: LoginScreen,
     Signup: SignupScreen,
-    Transaction: TransactionScreen
+    Transfer: TransferScreen
     // Pay: PayScreen
   },
   {

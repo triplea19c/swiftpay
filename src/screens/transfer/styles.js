@@ -9,11 +9,15 @@ const styles = StyleSheet.create({
     paddingRight: 60,
     flexWrap: "wrap",
     flex: 1,
-    textAlign: "center"
+    textAlign: "center",
+    position: "relative",
+    top: 50
   },
   imageBackground: {
     width: "100%",
-    height: "100%"
+    height: "100%",
+    justifyContent: "space-evenly",
+    flexDirection: "column"
   },
   drawerImage: {
     width: "15%",
@@ -22,14 +26,16 @@ const styles = StyleSheet.create({
     position: "relative",
     top: 50
   },
+  container: {
+    flexDirection: "row"
+  },
   firstContainer: {
-    paddingTop: 50,
+    paddingTop: 150,
     flexDirection: "row",
     flex: 3,
     justifyContent: "space-evenly"
   },
   secondContainer: {
-    paddingTop: 100,
     flexDirection: "row",
     flex: 3,
     justifyContent: "space-evenly"

@@ -18,7 +18,7 @@ import {
 import styles from "./styles";
 import walletImage from "../../../assets/images/wallet.png";
 import Signup from "./../signup";
-import Transaction from "./../transaction";
+import Transfer from "../transfer";
 
 class NavigationDrawerStructure extends Component {
   //Structure for the navigating Drawer
@@ -61,7 +61,7 @@ class Dashboard extends Component {
             </View>
             <View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Transaction")}
+                onPress={() => this.props.navigation.navigate("Transfer")}
               >
                 <Image
                   source={require("../../../assets/images/transfer.png")}
@@ -146,7 +146,7 @@ const Screen1_StackNavigator = createStackNavigator({
 const Screen2_StackNavigator = createStackNavigator({
   //All the screen from the Screen2 will be indexed here
   Third: {
-    screen: Transaction,
+    screen: Transfer,
     navigationOptions: ({ navigation }) => ({
       title: "Transfer",
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
@@ -218,7 +218,7 @@ const DrawerNavigatorExample = createDrawerNavigator({
       drawerLabel: "Swipe To Pay"
     }
   },
-  Transaction: {
+  Transfer: {
     //Title
     screen: Screen2_StackNavigator,
     navigationOptions: {
