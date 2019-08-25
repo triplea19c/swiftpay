@@ -12,6 +12,7 @@ import {
 import image from "../../../assets/images/topUpImage.png";
 import styles from "./styles";
 import validate from "../signup/validate_wrapper";
+import { Dropdown } from "react-native-material-dropdown";
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -37,6 +38,17 @@ export default class topUpScreen extends Component {
 
   render() {
     let { amount } = this.state;
+    let data = [
+      {
+        value: "MTN Mobile Money"
+      },
+      {
+        value: "Vodafone Cash"
+      },
+      {
+        value: "AirtelTigo Cash"
+      }
+    ];
 
     return (
       <DismissKeyboard>
@@ -60,6 +72,7 @@ export default class topUpScreen extends Component {
                 error={this.state.amountError}
                 secureTextEntry={true}
               />
+              <Dropdown label="Network" data={data} />
             </View>
             <View style={styles.button}>
               <TouchableOpacity

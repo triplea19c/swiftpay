@@ -15,6 +15,7 @@ import mtnMomoScreen from "./src/screens/mtnMomo";
 import vodafoneCashScreen from "./src/screens/vodafoneCash";
 import HomeScreen from "./src/screens/welcome";
 import topUpScreen from "./src/screens/top";
+import airtelTigoMoneyScreen from "./src/screens/airteltigoMoney";
 
 const AppNavigator = createStackNavigator(
   {
@@ -25,6 +26,7 @@ const AppNavigator = createStackNavigator(
     Transfer: TransferScreen,
     mtnMomo: mtnMomoScreen,
     vodafoneCash: vodafoneCashScreen,
+    airtelTigoMoney: airtelTigoMoneyScreen,
     topUp: topUpScreen
   },
   {

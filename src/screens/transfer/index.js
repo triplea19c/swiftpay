@@ -34,7 +34,9 @@ export default class TransferScreen extends Component {
           >
             <Image source={require("../../../assets/images/Ellipse_2.png")} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("airtelTigoMoney")}
+          >
             <Image source={require("../../../assets/images/Ellipse_3.png")} />
           </TouchableOpacity>
         </View>
