@@ -20,7 +20,6 @@ import {
 } from "react-navigation";
 import styles from "./styles";
 import walletImage from "../../../assets/images/wallet.png";
-import Signup from "./../signup";
 import Transfer from "../transfer";
 import Logout from "../logout";
 const ROOT_URL = "https://ab5626b6.ngrok.io/api/v1/";
@@ -31,7 +30,6 @@ class NavigationDrawerStructure extends Component {
     //Props to open/close the drawer
     this.props.navigationProps.toggleDrawer();
   };
-
 
   render() {
     return (
@@ -49,54 +47,53 @@ class NavigationDrawerStructure extends Component {
 }
 
 class Dashboard extends Component {
-// const ROOT_URL = "https://ab5626b6.ngrok.io/api/v1/";
+  // const ROOT_URL = "https://ab5626b6.ngrok.io/api/v1/";
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isLoading: true,
       authenticated: false
-    }
+    };
   }
 
   async componentDidMount() {
     try {
-      const token = await AsyncStorage.getItem('token');
+      const token = await AsyncStorage.getItem("token");
 
       if (token !== null) {
         var request = new Request(`${ROOT_URL}user/details`, {
           method: "GET",
           headers: new Headers({
             "X-Requested-With": "XMLHttpRequest",
-            "Authorization": `Bearer ${token}`,
-            "Accept": 'application/json'
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json"
           })
         });
 
         const detailsRequest = await fetch(request);
         const detailsResponse = await detailsRequest.json();
         console.log(detailsResponse);
-        this.setState({ isLoading: false})
-
+        this.setState({ isLoading: false });
       } else {
         console.log(`Error getting token: `);
-        this.setState({ isLoading: false, authenticated: false })
+        this.setState({ isLoading: false, authenticated: false });
       }
-     } catch (error) {
-       console.log(`Error getting token: ${error}`);
-       this.setState({ isLoading: false, authenticated: false })
-     }
+    } catch (error) {
+      console.log(`Error getting token: ${error}`);
+      this.setState({ isLoading: false, authenticated: false });
+    }
   }
 
-
   render() {
-    const {isLoading, authenticated} = this.state
+    const { isLoading, authenticated } = this.state;
 
-    if(!isLoading) {
+    if (!isLoading) {
       return (
         <View style={styles.mainContainer}>
           <ImageBackground
             source={imageBackground}
-            style={styles.topImageBackground}>
+            style={styles.topImageBackground}
+          >
             <TouchableOpacity>
               <Image source={walletImage} style={styles.walletImage} />
             </TouchableOpacity>
@@ -109,7 +106,8 @@ class Dashboard extends Component {
               </View>
               <View>
                 <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("Transfer")}>
+                  onPress={() => this.props.navigation.navigate("Transfer")}
+                >
                   <Image
                     source={require("../../../assets/images/transfer.png")}
                   />
@@ -125,7 +123,9 @@ class Dashboard extends Component {
                 <Text style={styles.text}>SERVICES</Text>
               </View>
               <View>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("topUp")}
+                >
                   <Image source={require("../../../assets/images/topup.png")} />
                 </TouchableOpacity>
                 <Text style={styles.text}>TOP-UP</Text>
@@ -157,8 +157,12 @@ class Dashboard extends Component {
           </ImageBackground>
         </View>
       );
-    }else {
-      return <View style={acc.loadingScreen}><ActivityIndicator /></View>
+    } else {
+      return (
+        <View style={acc.loadingScreen}>
+          <ActivityIndicator />
+        </View>
+      );
     }
   }
 }
@@ -299,11 +303,11 @@ const DrawerNavigatorExample = createDrawerNavigator({
 });
 
 const acc = StyleSheet.create({
-loadingScreen: {
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center'
-}
+  loadingScreen: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  }
 });
 
 export default createAppContainer(DrawerNavigatorExample);
