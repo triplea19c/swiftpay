@@ -1,52 +1,76 @@
-import React from "react";
-import { Text, View, Image, TouchableOpacity } from "react-native";
+import React, {Component} from "react";
+import { Text, View, Image, TouchableOpacity, ActivityIndicator, AsyncStorage, StyleSheet } from "react-native";
 import image from "../../../assets/images/swiftpaylogo.png";
-import { createStackNavigator, createAppContainer } from "react-navigation";
 import styles from "./styles";
-import LoginScreen from "../login";
-import SignupScreen from "../signup";
-import TransferScreen from "../transfer";
 // import PayScreen from "../pay";
 
-const HomeScreen = ({ navigation }) => {
-  return (
-    <View style={styles.container}>
-      <Image source={image} />
-      <Text style={styles.welcomeText}>Welcome to Convenience</Text>
-      <Text style={styles.motto}>SwiftPay - Secure, Instant & Reliable</Text>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => navigation.navigate("Login")}
-        >
-          <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.signupButton}
-          onPress={() => navigation.navigate("Signup")}
-        >
-          <Text style={styles.signupText}>SIGN UP</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
 
-const AppNavigator = createStackNavigator(
-  {
-    Home: HomeScreen,
-    Login: LoginScreen,
-    Signup: SignupScreen,
-    Transfer: TransferScreen
-    // Pay: PayScreen
-  },
-  {
-    initialRouteName: "Home",
-    headerMode: "none",
-    navigationOptions: {
-      headerVisible: false
+
+class HomeScreen extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoading: true,
+      authenticated: false
     }
   }
-);
 
-export default createAppContainer(AppNavigator);
+  async componentDidMount() {
+    try {
+      const value = await AsyncStorage.getItem('token');
+
+      if (value !== null) {
+        this.props.navigation.navigate("Dashboard");
+      } else {
+        console.log(`Error getting token: `);
+        this.setState({ isLoading: false, authenticated: false })
+      }
+     } catch (error) {
+       console.log(`Error getting token: ${error}`);
+       this.setState({ isLoading: false, authenticated: false })
+     }
+  }
+
+
+  render(){
+    const {isLoading, authenticated} = this.state
+
+    if(!isLoading) {
+      return (
+        <View style={styles.container}>
+          <Image source={image} />
+          <Text style={styles.welcomeText}>Welcome to Convenience</Text>
+          <Text style={styles.motto}>SwiftPay - Secure, Instant & Reliable</Text>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={() => this.props.navigation.navigate("Login")}
+            >
+              <Text style={styles.loginText}>LOGIN</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.signupButton}
+              onPress={() => this.props.navigation.navigate("Signup")}
+            >
+              <Text style={styles.signupText}>SIGN UP</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    }else {
+      return <View style={acc.loadingScreen}><ActivityIndicator /></View>
+    }
+
+  }
+};
+
+const acc = StyleSheet.create({
+loadingScreen: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center'
+}
+});
+
+export default HomeScreen

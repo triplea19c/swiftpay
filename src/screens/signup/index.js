@@ -7,7 +7,10 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  AsyncStorage,
+  ActivityIndicator,
+  StyleSheet
 } from "react-native";
 import imageBackground from "../../../assets/images/background.png";
 import styles from "./styles";
@@ -16,12 +19,10 @@ import validatePassword from "./validate_password";
 import { db } from "../../config";
 import firebase from "firebase";
 import "firebase/firebase-firestore";
+import queryString from 'query-string';
+// import AsyncStorage from '@react-native-community/async-storage';
 
-const ROOT_URL = "https://824bc8bf.ngrok.io/api/v1/";
-
-let addUser = user => {
-  db.ref("/users").push(user);
-};
+const ROOT_URL = "https://ab5626b6.ngrok.io/api/v1/";
 
 const DismissKeyboard = props => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -43,13 +44,15 @@ export default class SignupScreen extends Component {
       password: "",
       passwordError: "",
       confirmpassword: "",
-      confirmpasswordError: ""
+      confirmpasswordError: "",
+      isLoading: false
     };
     //  this.register = this.register.bind(this)
   }
 
   postRegister = async () => {
     try {
+      this.setState({isLoading: true})
       var data = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
@@ -65,23 +68,27 @@ export default class SignupScreen extends Component {
           "X-Requested-With": "XMLHttpRequest",
           "Content-Type": "application/x-www-form-urlencoded"
         }),
-        body: JSON.stringify({
-          firstname: this.state.firstname,
-          lastname: this.state.lastname,
-          email: this.state.email,
-          mobile_number: this.state.phone,
-          password: this.state.password,
-          c_password: this.state.confirmpassword
-        })
+        body: queryString.stringify(data)
       });
       console.log(request);
       const registerRequest = await fetch(request);
-      const register = await registerRequest.json();
-      if (register) {
-        console.log(register);
+      const registerResponse = await registerRequest.json();
+      if (registerResponse) {
+        console.log(registerResponse);
+        // console.log(`token is .......12: ${registerResponse.success.token}`);
+        // await AsyncStorage.setItem('token', JSON.stringify{registerResponse.success.token});
+        await AsyncStorage.setItem('token', registerResponse.success.token);
+        const value = await AsyncStorage.getItem('token');
+        if (value && value !== null) {
+          console.log(`Success getting token...${value}`);
+          this.props.navigation.navigate("Dashboard");
+          this.setState({ isLoading: false})
+        }
+        this.setState({isLoading: false})
+
       }
-      console.log(register);
     } catch (err) {
+      this.setState({isLoading: false})
       console.log("Error fetching data-----------", err);
     }
   };
@@ -94,108 +101,124 @@ export default class SignupScreen extends Component {
     let { password } = this.state;
     let { confirmpassword } = this.state;
 
-    return (
-      <DismissKeyboard>
-        <KeyboardAvoidingView behavior="padding" enabled>
-          <ImageBackground
-            source={imageBackground}
-            style={styles.imageBackground}
-          >
-            <View style={styles.container}>
-              <Text style={styles.welcomeText}>Akwaaba</Text>
-              <TextField
-                label="First name"
-                value={firstname}
-                onChangeText={firstname => this.setState({ firstname })}
-                onBlur={() => {
-                  this.setState({
-                    firstnameError: validate("firstname", this.state.firstname)
-                  });
-                }}
-                error={this.state.firstnameError}
-              />
-              <TextField
-                label="Last name"
-                value={lastname}
-                onChangeText={lastname => this.setState({ lastname })}
-                onBlur={() => {
-                  this.setState({
-                    lastnameError: validate("lastname", this.state.lastname)
-                  });
-                }}
-                error={this.state.lastnameError}
-              />
-              <TextField
-                label="Email"
-                value={email}
-                onChangeText={email => this.setState({ email })}
-                onBlur={() => {
-                  this.setState({
-                    emailError: validate("email", this.state.email)
-                  });
-                }}
-                error={this.state.emailError}
-              />
-              <TextField
-                label="Phone number"
-                value={phone}
-                onChangeText={phone => this.setState({ phone })}
-                onBlur={() => {
-                  this.setState({
-                    phoneError: validate("phone", this.state.phone)
-                  });
-                }}
-                error={this.state.phoneError}
-              />
-              <TextField
-                label="Password"
-                value={password}
-                onChangeText={value =>
-                  this.setState({ password: value.trim() })
-                }
-                onBlur={() => {
-                  this.setState({
-                    passwordError: validate("password", this.state.password)
-                  });
-                }}
-                error={this.state.passwordError}
-                secureTextEntry={true}
-              />
-              <TextField
-                label="Confirm Password"
-                value={confirmpassword}
-                onChangeText={confirmpassword =>
-                  this.setState({ confirmpassword })
-                }
-                onBlur={() => {
-                  this.setState({
-                    confirmpasswordError: validatePassword(
-                      this.state.password,
-                      this.state.confirmpassword
-                    )
-                  });
-                }}
-                error={this.state.confirmpasswordError}
-                secureTextEntry={true}
-              />
-              <View style={styles.button}>
-                <TouchableOpacity
-                  style={styles.signupButton}
-                  onPress={this.postRegister}
+    const {isLoading} = this.state
+
+    if(!isLoading) {
+      return (
+        <DismissKeyboard>
+          <KeyboardAvoidingView behavior="padding" enabled>
+            <ImageBackground
+              source={imageBackground}
+              style={styles.imageBackground}
+            >
+              <View style={styles.container}>
+                <Text style={styles.welcomeText}>Akwaaba</Text>
+                <TextField
+                  label="First name"
+                  value={firstname}
+                  onChangeText={firstname => this.setState({ firstname })}
+                  onBlur={() => {
+                    this.setState({
+                      firstnameError: validate("firstname", this.state.firstname)
+                    });
+                  }}
+                  error={this.state.firstnameError}
+                />
+                <TextField
+                  label="Last name"
+                  value={lastname}
+                  onChangeText={lastname => this.setState({ lastname })}
+                  onBlur={() => {
+                    this.setState({
+                      lastnameError: validate("lastname", this.state.lastname)
+                    });
+                  }}
+                  error={this.state.lastnameError}
+                />
+                <TextField
+                  label="Email"
+                  value={email}
+                  onChangeText={email => this.setState({ email })}
+                  onBlur={() => {
+                    this.setState({
+                      emailError: validate("email", this.state.email)
+                    });
+                  }}
+                  error={this.state.emailError}
+                />
+                <TextField
+                  label="Phone number"
+                  value={phone}
+                  onChangeText={phone => this.setState({ phone })}
+                  onBlur={() => {
+                    this.setState({
+                      phoneError: validate("phone", this.state.phone)
+                    });
+                  }}
+                  error={this.state.phoneError}
+                />
+                <TextField
+                  label="Password"
+                  value={password}
+                  onChangeText={value =>
+                    this.setState({ password: value.trim() })
+                  }
+                  onBlur={() => {
+                    this.setState({
+                      passwordError: validate("password", this.state.password)
+                    });
+                  }}
+                  error={this.state.passwordError}
+                  secureTextEntry={true}
+                />
+                <TextField
+                  label="Confirm Password"
+                  value={confirmpassword}
+                  onChangeText={confirmpassword =>
+                    this.setState({ confirmpassword })
+                  }
+                  onBlur={() => {
+                    this.setState({
+                      confirmpasswordError: validatePassword(
+                        this.state.password,
+                        this.state.confirmpassword
+                      )
+                    });
+                  }}
+                  error={this.state.confirmpasswordError}
+                  secureTextEntry={true}
+                />
+                <View style={styles.button}>
+                  <TouchableOpacity
+                    style={styles.signupButton}
+                    onPress={this.postRegister}
+                  >
+                    <Text style={styles.signupText}>SIGN UP</Text>
+                  </TouchableOpacity>
+                </View>
+                <Text
+                  style={styles.loginText}
+                  onPress={() => this.props.navigation.navigate("Login")}
                 >
-                  <Text style={styles.signupText}>SIGN UP</Text>
-                </TouchableOpacity>
+                  Already have an account?
+                </Text>
               </View>
-              <Text
-                style={styles.loginText}
-                onPress={() => this.props.navigation.navigate("Login")}
-              >
-                Already have an account?
-              </Text>
-            </View>
-          </ImageBackground>
-        </KeyboardAvoidingView>
-      </DismissKeyboard>
-    );
+            </ImageBackground>
+          </KeyboardAvoidingView>
+        </DismissKeyboard>
+      );
+    }else {
+      return <View style={acc.loadingScreen}><ActivityIndicator /></View>
+    }
+
+
   }
 }
+
+const acc = StyleSheet.create({
+  loadingScreen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});

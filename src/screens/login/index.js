@@ -11,10 +11,6 @@ import {
 } from "react-native";
 import image from "../../../assets/images/swiftpaylogo.png";
 import styles from "./styles";
-import { createStackNavigator, createAppContainer } from "react-navigation";
-import DashboardScreen from "../dashboard";
-import mtnMomoScreen from "../mtnMomo";
-import vodafoneCashScreen from "../vodafoneCash";
 import validate from "../signup/validate_wrapper";
 import firebase from "firebase";
 
@@ -24,7 +20,7 @@ const DismissKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 );
 
-export class LoginScreen extends Component {
+export default class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -116,20 +112,3 @@ export class LoginScreen extends Component {
     );
   }
 }
-const AppNavigator = createStackNavigator(
-  {
-    Login: LoginScreen,
-    Dashboard: DashboardScreen,
-    mtnMomo: mtnMomoScreen,
-    vodafoneCash: vodafoneCashScreen
-  },
-  {
-    initialRouteName: "Login",
-    headerMode: "none",
-    navigationOptions: {
-      headerVisible: false
-    }
-  }
-);
-
-export default createAppContainer(AppNavigator);
