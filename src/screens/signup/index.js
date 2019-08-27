@@ -20,7 +20,6 @@ import { db } from "../../config";
 import firebase from "firebase";
 import "firebase/firebase-firestore";
 import queryString from 'query-string';
-// import AsyncStorage from '@react-native-community/async-storage';
 
 const ROOT_URL = "https://ab5626b6.ngrok.io/api/v1/";
 

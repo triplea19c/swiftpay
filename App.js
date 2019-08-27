@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import LoginScreen from "./src/screens/login";
+import Logout from "./src/screens/logout";
 import SignupScreen from "./src/screens/signup";
 import TransferScreen from "./src/screens/transfer";
 import DashboardScreen from "./src/screens/dashboard";
@@ -21,6 +22,7 @@ const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     Login: LoginScreen,
+    Logout: Logout,
     Signup: SignupScreen,
     Dashboard: DashboardScreen,
     Transfer: TransferScreen,

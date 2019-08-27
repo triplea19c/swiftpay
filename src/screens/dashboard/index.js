@@ -22,6 +22,7 @@ import styles from "./styles";
 import walletImage from "../../../assets/images/wallet.png";
 import Transfer from "../transfer";
 import Logout from "../logout";
+
 const ROOT_URL = "https://ab5626b6.ngrok.io/api/v1/";
 
 class NavigationDrawerStructure extends Component {
