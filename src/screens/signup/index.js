@@ -16,13 +16,10 @@ import imageBackground from "../../../assets/images/background.png";
 import styles from "./styles";
 import validate from "./validate_wrapper";
 import validatePassword from "./validate_password";
-import { db } from "../../config";
-import firebase from "firebase";
 import "firebase/firebase-firestore";
-import queryString from 'query-string';
-// import AsyncStorage from '@react-native-community/async-storage';
+import queryString from "query-string";
 
-const ROOT_URL = "https://ab5626b6.ngrok.io/api/v1/";
+const ROOT_URL = "https://swiftpay-api.herokuapp.com/api/v1/";
 
 const DismissKeyboard = props => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -52,7 +49,7 @@ export default class SignupScreen extends Component {
 
   postRegister = async () => {
     try {
-      this.setState({isLoading: true})
+      this.setState({ isLoading: true });
       var data = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
@@ -77,18 +74,17 @@ export default class SignupScreen extends Component {
         console.log(registerResponse);
         // console.log(`token is .......12: ${registerResponse.success.token}`);
         // await AsyncStorage.setItem('token', JSON.stringify{registerResponse.success.token});
-        await AsyncStorage.setItem('token', registerResponse.success.token);
-        const value = await AsyncStorage.getItem('token');
+        await AsyncStorage.setItem("token", registerResponse.success.token);
+        const value = await AsyncStorage.getItem("token");
         if (value && value !== null) {
           console.log(`Success getting token...${value}`);
           this.props.navigation.navigate("Dashboard");
-          this.setState({ isLoading: false})
+          this.setState({ isLoading: false });
         }
-        this.setState({isLoading: false})
-
+        this.setState({ isLoading: false });
       }
     } catch (err) {
-      this.setState({isLoading: false})
+      this.setState({ isLoading: false });
       console.log("Error fetching data-----------", err);
     }
   };
@@ -101,9 +97,9 @@ export default class SignupScreen extends Component {
     let { password } = this.state;
     let { confirmpassword } = this.state;
 
-    const {isLoading} = this.state
+    const { isLoading } = this.state;
 
-    if(!isLoading) {
+    if (!isLoading) {
       return (
         <DismissKeyboard>
           <KeyboardAvoidingView behavior="padding" enabled>
@@ -119,7 +115,10 @@ export default class SignupScreen extends Component {
                   onChangeText={firstname => this.setState({ firstname })}
                   onBlur={() => {
                     this.setState({
-                      firstnameError: validate("firstname", this.state.firstname)
+                      firstnameError: validate(
+                        "firstname",
+                        this.state.firstname
+                      )
                     });
                   }}
                   error={this.state.firstnameError}
@@ -207,18 +206,20 @@ export default class SignupScreen extends Component {
           </KeyboardAvoidingView>
         </DismissKeyboard>
       );
-    }else {
-      return <View style={acc.loadingScreen}><ActivityIndicator /></View>
+    } else {
+      return (
+        <View style={acc.loadingScreen}>
+          <ActivityIndicator />
+        </View>
+      );
     }
-
-
   }
 }
 
 const acc = StyleSheet.create({
   loadingScreen: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   }
 });

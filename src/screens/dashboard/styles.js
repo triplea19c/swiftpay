@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   outerContainer: {
+    marginTop: 30,
     flexDirection: "row",
     flex: 4,
     justifyContent: "space-evenly"
@@ -50,6 +51,36 @@ const styles = StyleSheet.create({
   walletImage: {
     marginBottom: 50,
     marginTop: 50
+  },
+  card: {
+    borderRadius: 10
+  },
+  swiftpayWallet: {
+    backgroundColor: "#D99147",
+    borderRadius: 30,
+    marginTop: 30,
+    height: 180
+  },
+  andyText: {
+    fontSize: 20,
+    color: "#FFFFFF",
+    fontWeight: "bold"
+  },
+  walletText: {
+    margin: 10,
+    color: "#FFFFFF",
+    fontWeight: "900"
+  },
+  balanceText: {
+    marginTop: 40,
+    marginLeft: 150,
+    color: "#D3D3D3",
+    fontWeight: "900"
+  },
+  moneyText: {
+    marginLeft: 170,
+    color: "#FFFFFF",
+    fontWeight: "900"
   }
 });
 export default styles;

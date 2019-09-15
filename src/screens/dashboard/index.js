@@ -12,17 +12,19 @@ import {
 import imageBackground from "../../../assets/images/new_background.jpg";
 import Services from "../services";
 import Swipe from "../swipe";
-import Top from "../top";
+import TopUp from "../topUp";
 import {
   createDrawerNavigator,
   createStackNavigator,
   createAppContainer
 } from "react-navigation";
 import styles from "./styles";
-import walletImage from "../../../assets/images/wallet.png";
+//import walletImage from "../../../assets/images/wallet.png";
 import Transfer from "../transfer";
 import Logout from "../logout";
-const ROOT_URL = "https://ab5626b6.ngrok.io/api/v1/";
+import { Card } from "react-native-elements";
+
+const ROOT_URL = "https://swiftpay-api.herokuapp.com/api/v1/";
 
 class NavigationDrawerStructure extends Component {
   //Structure for the navigating Drawer
@@ -95,11 +97,18 @@ class Dashboard extends Component {
             style={styles.topImageBackground}
           >
             <TouchableOpacity>
-              <Image source={walletImage} style={styles.walletImage} />
+              <Card containerStyle={styles.swiftpayWallet}>
+                <Text style={styles.andyText}>Welcome Andy</Text>
+                <Text style={styles.walletText}>Swiftpay Wallet</Text>
+                <Text style={styles.balanceText}>Balance:</Text>
+                <Text style={styles.moneyText}>GHC 54,000.00</Text>
+              </Card>
             </TouchableOpacity>
             <View style={styles.outerContainer}>
               <View>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("Swipe")}
+                >
                   <Image source={require("../../../assets/images/swipe.png")} />
                 </TouchableOpacity>
                 <Text style={styles.text}>SWIPE TO PAY</Text>
@@ -230,7 +239,7 @@ const Screen3_StackNavigator = createStackNavigator({
 const Screen4_StackNavigator = createStackNavigator({
   //All the screen from the Screen4 will be indexed here
   Fifth: {
-    screen: Top,
+    screen: TopUp,
     navigationOptions: ({ navigation }) => ({
       title: "Top Up",
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
@@ -286,7 +295,7 @@ const DrawerNavigatorExample = createDrawerNavigator({
       drawerLabel: "Services"
     }
   },
-  Top: {
+  TopUp: {
     //Title
     screen: Screen4_StackNavigator,
     navigationOptions: {
